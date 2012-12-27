@@ -8,13 +8,13 @@ class SuperLongClassNamedFoo{
     private $array = array('really_long_one', 'really_long_two');
     private $super_long_property_named_foo = 'foo';
 
-
     public function long_method_name(){
         echo "\$this->super_long_property_named_foo == {$this->super_long_property_named_foo}\n";
     }
 }
 
 class SuperLongClassNamedBar{
+    private $array = array('really_long_one', 'really_long_two');
     private $super_long_property_named_bar = 'bar';
 
     public function long_method_name(){
@@ -23,6 +23,7 @@ class SuperLongClassNamedBar{
 }
 
 class SuperLongClassNamedBaz{
+    private $array = array('really_long_one', 'really_long_two');
     private $super_long_property_named_baz = 'baz';
 
     public function long_method_name(){
