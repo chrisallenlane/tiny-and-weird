@@ -5,7 +5,9 @@
  * be stripped out when passed through the minifier.
  */
 class SuperLongClassNamedFoo{
+    private $array = array('really_long_one', 'really_long_two');
     private $super_long_property_named_foo = 'foo';
+
 
     public function long_method_name(){
         echo "\$this->super_long_property_named_foo == {$this->super_long_property_named_foo}\n";

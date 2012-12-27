@@ -3,7 +3,10 @@
 class TinyAndWeird{
     # remap and track variable names
     private $b52_map   = array();
-    private $options   = array();
+    private $options   = array(
+        'tokens_to_ignore'  => array(),
+        'remove_whitespace' => true,
+    );
     private $remap     = array();
     private $var_count = 0;
 
@@ -34,8 +37,10 @@ class TinyAndWeird{
         }
         ksort($this->b52_map);
 
-        # store the options
-        $this->options = $options;
+        # store options
+        if(isset($options['remove_whitespace'])){
+            $this->options['remove_whitespace'] = $options['remove_whitespace'];
+        }
 
         # add to the list of tokens to ignore
         if(!empty($options['tokens_to_ignore'])){
@@ -130,6 +135,14 @@ class TinyAndWeird{
                         }
                     }
 
+                    /* @todo: eventually, it would be cool if this could minify
+                     * associative array indeces */
+                    /*
+                    else if($id == T_CONSTANT_ENCAPSED_STRING){
+                        $text = 'ARRAY_INDEX';
+                    } 
+                    */
+
                     # buffer the text
                     $buffer .= $text;
                 }
@@ -138,16 +151,16 @@ class TinyAndWeird{
 
         # now that the new source has been minified and buffered, strip out any 
         # unnecessary remaining whitespace
-
-        # allow no more than 1 space between tokens
-        $buffer = preg_replace('/\s\s+/', ' ' , $buffer);
-
-        # remove spaces surrounding tokenizing characters
-        $buffer = preg_replace('/;\s/'  , ';' , $buffer);
-        $buffer = preg_replace('/\{\s/' , '{' , $buffer);
-        $buffer = preg_replace('/\s\}/' , '}' , $buffer);
-        $buffer = preg_replace('/\(\s/' , '(' , $buffer);
-        $buffer = preg_replace('/\s\)/' , ')' , $buffer);
+        if($this->options['remove_whitespace']){
+            # allow no more than 1 space between tokens
+            $buffer = preg_replace('/\s\s+/', ' ' , $buffer);
+            # remove spaces surrounding tokenizing characters
+            $buffer = preg_replace('/;\s/'  , ';' , $buffer);
+            $buffer = preg_replace('/\{\s/' , '{' , $buffer);
+            $buffer = preg_replace('/\s\}/' , '}' , $buffer);
+            $buffer = preg_replace('/\(\s/' , '(' , $buffer);
+            $buffer = preg_replace('/\s\)/' , ')' , $buffer);
+        }
 
         # return the result
         return $buffer;
