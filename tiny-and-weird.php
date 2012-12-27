@@ -30,6 +30,10 @@ class TinyAndWeird{
      * Initializes the minifier.
      */
     public function __construct($options = array()){
+        # promote compatibility between php 4 and 5
+        if (!defined('T_ML_COMMENT')) { define('T_ML_COMMENT', T_COMMENT); }
+        else { define('T_DOC_COMMENT', T_ML_COMMENT); }
+
         # metaprogram (and sort) a map
         for($i = 0; $i < 26; $i++){
             $this->b52_map[$i]      = chr(97 + $i);
