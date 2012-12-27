@@ -65,7 +65,7 @@ See `minify.php` and `tiny-and-weird.php` for further examples in the comments.
 
 Why Minify PHP?
 ---------------
-PHP is not commonly minified, because it is not sent over the Internet from server to client. In some edge-cases, though, you may want to minify it regardless. I created `Tiny and Weird` when I was writing a trojan (which I wanted to be both small and unreadable) for some white-hat security work. 
+PHP is not commonly minified, because it is not sent over the Internet from server to client. In some edge-cases, though, you may want to minify it regardless. I created `Tiny and Weird` when I was writing a trojan (which I wanted to be both small and unreadable) for a white-hat security project. 
 
 Security
 --------
@@ -75,7 +75,9 @@ Known Issues
 ------------
 While not a "bug", be aware that `Tiny and Weird` does not remap string literals that are being used as indices in associative arrays.
 
-Also, be warned that I hacked out this script in only a few hours, and that rigorous unit tests have yet to be written. (You may run `rake test` to run the tests that _have been_ written, however.) I urge you to run all generated minified code through unit tests you use on your unminified code before deploying into production. Be further warned that the obfuscation process will break large projects (wherein known function names, etc, must be relied on for inter-object communication), and thus `Tiny and Weird` is best suited for use on small projects only.
+Also, be warned that I hacked out this script in only a few hours, and that rigorous unit tests have yet to be written. (You may run `rake test` to run the tests that _have been_ written, however.) I urge you to run all generated minified code through the unit tests you use on your unminified code before deploying into production.
+
+Be further warned that the obfuscation process will break large projects (wherein known function names, etc, must be relied on for inter-object communication), and thus `Tiny and Weird` is best suited for use on small projects only.
 
 License
 -------
