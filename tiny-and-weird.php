@@ -3,35 +3,46 @@
 class TinyAndWeird{
     # remap and track variable names
     private $b52_map   = array();
+    private $options   = array();
     private $remap     = array();
     private $var_count = 0;
 
     # do not remap certain variables and keywords
     private $tokens_to_ignore = array(
-        '$GLOBALS'              => 'true', '$HTTP_RAW_POST_DATA'   => 'true',
-        '$_COOKIE'              => 'true', '$_ENV'                 => 'true',
-        '$_FILES'               => 'true', '$_GET'                 => 'true',
-        '$_POST'                => 'true', '$_REQUEST'             => 'true',
-        '$_SERVER'              => 'true', '$_SESSION'             => 'true',
-        '$argc'                 => 'true', '$argv'                 => 'true',
-        '$http_response_header' => 'true', '$php_errormsg'         => 'true',
-        '$this'                 => 'true', '__construct'           => 'true',
-        'false'                 => 'true', 'null'                  => 'true',
-        'parent'                => 'true', 'self'                  => 'true',
-        'super'                 => 'true', 'true'                  => 'true',
-        'undefined'             => 'true',
+        '$GLOBALS'              => true, '$HTTP_RAW_POST_DATA'   => true,
+        '$_COOKIE'              => true, '$_ENV'                 => true,
+        '$_FILES'               => true, '$_GET'                 => true,
+        '$_POST'                => true, '$_REQUEST'             => true,
+        '$_SERVER'              => true, '$_SESSION'             => true,
+        '$argc'                 => true, '$argv'                 => true,
+        '$http_response_header' => true, '$php_errormsg'         => true,
+        '$this'                 => true, '__construct'           => true,
+        'false'                 => true, 'null'                  => true,
+        'parent'                => true, 'self'                  => true,
+        'super'                 => true, 'true'                  => true,
+        'undefined'             => true,
     );
 
     /**
      * Initializes the minifier.
      */
-    public function __construct(){
+    public function __construct($options = array()){
         # metaprogram (and sort) a map
         for($i = 0; $i < 26; $i++){
             $this->b52_map[$i]      = chr(97 + $i);
             $this->b52_map[$i + 26] = strtoupper($this->b52_map[$i]);
         }
         ksort($this->b52_map);
+
+        # store the options
+        $this->options = $options;
+
+        # add to the list of tokens to ignore
+        if(!empty($options['tokens_to_ignore'])){
+            foreach($options['tokens_to_ignore'] as $token){
+                $this->tokens_to_ignore[$token] = true;
+            }
+        }
     }
 
     /**
