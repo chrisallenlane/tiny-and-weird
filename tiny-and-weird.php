@@ -126,7 +126,6 @@ class TinyAndWeird{
                         # ignore tokens that have been specified to be ignored, as well
                         # as native php function calls. if we rename the latter, the
                         # application will break.
-                        //if(!isset($this->tokens_to_ignore[$text]) && !$this->matches_pattern_to_ignore($text) && !function_exists($text)){
                         if(
                             !function_exists($text) &&
                             !isset($this->tokens_to_ignore[$text]) &&
