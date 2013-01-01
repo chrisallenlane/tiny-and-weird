@@ -12,7 +12,7 @@ class SuperLongClassNamedFoo{
 
     public function long_method_name(){
         echo "\$this->super_long_property_named_foo == {$this->super_long_property_named_foo}\n";
-        echo "{$this->dont_obfuscate_by_pattern_three}";
+        echo "{$this->dont_obfuscate_by_pattern_one}";
     }
 }
 
@@ -24,7 +24,7 @@ class SuperLongClassNamedBar{
 
     public function long_method_name(){
         echo "\$this->super_long_property_named_bar == {$this->super_long_property_named_bar}\n";
-        echo "{$this->dont_obfuscate_by_pattern_three}";
+        echo "{$this->dont_obfuscate_by_pattern_two}";
     }
 }
 
