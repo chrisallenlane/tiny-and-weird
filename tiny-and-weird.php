@@ -64,7 +64,7 @@ class TinyAndWeird{
         }
         if(!empty($options['patterns_to_ignore'])){
             foreach($options['patterns_to_ignore'] as $pattern){
-                $this->patterns_to_ignore[$pattern] = true;
+                $this->patterns_to_ignore[] = $pattern;
             }
         }
     }
@@ -106,7 +106,8 @@ class TinyAndWeird{
 
                         if(
                             !isset($this->tokens_to_ignore[$text]) &&
-                            !isset($this->tokens_to_ignore[$scope_safe])
+                            !isset($this->tokens_to_ignore[$scope_safe]) &&
+                            !$this->matches_pattern_to_ignore($scope_safe)
                         ){
                             # remap the variable name if it has already been set
                             if(isset($this->remap[$id][$scope_safe])){ $text = '$' . $this->remap[$id][$scope_safe]; }
@@ -128,7 +129,8 @@ class TinyAndWeird{
                         //if(!isset($this->tokens_to_ignore[$text]) && !$this->matches_pattern_to_ignore($text) && !function_exists($text)){
                         if(
                             !function_exists($text) &&
-                            !isset($this->tokens_to_ignore[$text])
+                            !isset($this->tokens_to_ignore[$text]) &&
+                            !$this->matches_pattern_to_ignore($text)
                         ){
                             # peek into the previous token
                             list($last_id, $last_token) = $tokens[$index - 1];
