@@ -87,17 +87,19 @@ class TinyAndWeird{
                     if($id == T_VARIABLE){
                         # don't remap variables names that will cause problems, like
                         # superglobal names
-                        if(!isset($this->tokens_to_ignore[$text])){
-                            # pre-process the text
-                            $text = str_replace('$', '', $text);
+                        $scope_safe = str_replace('$', '', $text);
 
+                        if(
+                            !isset($this->tokens_to_ignore[$text]) &&
+                            !isset($this->tokens_to_ignore[$scope_safe])
+                        ){
                             # remap the variable name if it has already been set
-                            if(isset($this->remap[$id][$text])){ $text = '$' . $this->remap[$id][$text]; }
+                            if(isset($this->remap[$id][$scope_safe])){ $text = '$' . $this->remap[$id][$scope_safe]; }
 
                             # otherwise, create a new mapping
                             else {
-                                $this->remap[$id][$text] = $this->base52_encode($this->var_count);
-                                $text                    = '$' . $this->remap[$id][$text];
+                                $this->remap[$id][$scope_safe] = $this->base52_encode($this->var_count);
+                                $text                          = '$' . $this->remap[$id][$scope_safe];
                                 $this->var_count++;
                             }
                         }
