@@ -55,6 +55,7 @@ $options = array(
     'tokens_to_ignore'  => array(
         'alpha', 'bravo', 'charlie'
     )
+
     # you may also ignore tokens whose text matches one of a given number
     # of regular expressions
     'patterns_to_ignore'  => array(
