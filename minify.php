@@ -6,7 +6,7 @@ include './tiny-and-weird.php';
 
 # set some minifier options
 $options = array(
-    'remove_whitespace' => true,
+    'remove_whitespace' => false,
     'tokens_to_ignore'  => array(
         'alpha', 'bravo', 'charlie',
     ),

@@ -53,7 +53,13 @@ $options = array(
     # minification. This can be helpful if the minified class must conform
     # to an API specification, for example.
     'tokens_to_ignore'  => array(
-        'one', 'two', 'three'
+        'alpha', 'bravo', 'charlie'
+    )
+    # you may also ignore tokens whose text matches one of a given number
+    # of regular expressions
+    'patterns_to_ignore'  => array(
+        '/^dont_obfuscate_me/',
+        '/^me_either/',
     )
 );
 
@@ -65,7 +71,7 @@ See `minify.php` and `tiny-and-weird.php` for further examples in the comments.
 
 Why Minify PHP?
 ---------------
-PHP is not commonly minified, because it is not sent over the Internet from server to client. In some edge-cases, though, you may want to minify it regardless. I created `Tiny and Weird` when I was writing a trojan (which I wanted to be both small and unreadable) for a white-hat security project. 
+PHP is not commonly minified, because it is not sent over the Internet from server to client. In some edge-cases, though, you may want to minify it regardless. I created `Tiny and Weird` when I was writing a trojan (that I wanted to be both small and unreadable) for a white-hat security project. 
 
 Security
 --------
